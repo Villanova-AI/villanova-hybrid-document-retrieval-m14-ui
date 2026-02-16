@@ -1,0 +1,23 @@
+DirectoryIndex index.html
+
+# Turn Rewrite Engine on
+RewriteEngine On
+
+#ROOT
+RewriteCond %{REQUEST_URI} ^/$
+RewriteRule / index.html [QSA,L]
+
+#FULL PAGE
+RewriteCond %{HTTP:X-PJAX} !true
+RewriteCond %{DOCUMENT_ROOT}/Agata/pages/$1 -f
+RewriteRule ^(.*\.html)$ /Agata/index.html [L,QSA]
+
+#PJAX
+RewriteCond %{HTTP:X-PJAX} true
+#RewriteCond %{QUERY_STRING} _pjax=
+RewriteCond %{REQUEST_URI} !^/Agata/(pages)/ [NC]
+RewriteRule ^(.*)$ pages/$1 [L]
+
+#404
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*\.html)$ 404.html [L]

@@ -1,0 +1,408 @@
+@font-face {
+  font-family: 'Nimbus Roman';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Nimbus Roman No9 L Regular'), url('fonts/NimbusRomNo9L-Reg.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Nimbus Roman';
+  font-style: italic;
+  font-weight: normal;
+  src: local('Nimbus Roman No9 L Regular Italic'),
+    url('fonts/NimbusRomNo9L-RegIta.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Nimbus Roman';
+  font-style: normal;
+  font-weight: bold;
+  src: local('Nimbus Roman No9 L Bold'), url('fonts/NimbusRomNo9L-Med.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Nimbus Roman';
+  font-style: italic;
+  font-weight: bold;
+  src: local('Nimbus Roman No9 L Bold Italic'),
+    url('fonts/NimbusRomNo9L-MedIta.woff') format('woff');
+}
+
+::selection {
+  color: trasparent;
+  background: rgba(158, 172, 186, 0.4);
+  text-shadow: none;
+}
+
+/* For Mozilla Firefox */
+::-moz-selection {
+  color: rgba(0, 0, 0, 0);
+  background: rgba(158, 172, 186, 0.4);
+}
+
+.t .mark,
+.t mark {
+  color: rgba(0, 0, 0, 0) !important;
+  background: rgba(158, 172, 186, 0.2);
+}
+
+.courtesyView .t .mark,
+.courtesyView .t mark  {
+  color: rgb(0, 0, 0) !important;
+  background: rgba(158, 172, 186, 0.2);
+}
+
+.selectAll {
+  background: rgba(158, 172, 186, 0.5) !important;
+  border-top: 1px solid red;
+  border-bottom: 1px solid red;
+}
+
+.trActive {
+  background: rgba(158, 172, 186, 0.4);
+}
+
+#bookmarks-panel {
+  margin: 0;
+  padding: 5px;
+}
+
+.actions {
+  cursor: pointer;
+}
+
+/*float menu*/
+
+.button-parent i {
+  color: black;
+  font-size: 20px !important;
+  /* 24px preferred icon size */
+}
+
+.button-parent a {
+  text-decoration: none;
+}
+
+#btn {
+  display: none;
+}
+
+.button-parent {
+  display: flex;
+  position: absolute;
+  top: 45px;
+  right: 15px;
+}
+
+.button {
+  width: 50px;
+  height: 50px;
+  display: block;
+  margin: 5px;
+  background-color: #E7E7E7;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: black !important;
+  cursor: pointer;
+}
+
+/* link and link-parent */
+.link-parent {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  transition: all .3s;
+}
+
+.link-item {
+  background-color: #a6a6a6;
+  display: block;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 5px;
+  transform: translateY(5px);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  animation-name: move-up;
+  animation-duration: .3s;
+  animation-timing-function: ease-in;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+.current {
+  background-color: #f1f1f1;
+}
+
+/* control click */
+#btn:checked~.link-parent {
+  display: flex;
+}
+
+/* animation */
+@keyframes move-up {
+  0% {
+    transform: translateY(5px);
+  }
+
+  33% {
+    transform: translateY(0px);
+  }
+
+  66% {
+    transform: translateY(-5px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+#link-one {
+  animation-delay: .1s;
+}
+
+#link-two {
+  animation-delay: .2s;
+}
+
+#link-third {
+  animation-delay: .3s;
+}
+
+#link-forth {
+  animation-delay: .4s;
+}
+
+.tooltip-inner {
+  max-width: initial;
+  background-color: white;
+  max-width: 400px !important;
+  max-height: 300px !important;
+  overflow-y: scroll;
+  padding: 8px;
+}
+
+.table {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 1rem;
+  background-color: transparent;
+}
+
+.popover,
+.tooltip-inner {
+  line-height: 1.5em;
+  background: #fff;
+  border: none;
+  border-radius: 3px;
+  box-shadow: 0 8px 10px 1px rgb(0 0 0 / 14%), 0 3px 14px 2px rgb(0 0 0 / 12%), 0 5px 5px -3px rgb(0 0 0 / 20%);
+  color: #555;
+}
+
+.table tr {
+  font-size: 14px;
+  font-weight: bold;
+  border: solid 1px #fb8c00;
+}
+
+.light-theme .controls {
+  background: linear-gradient(60deg, #ffa726, #fb8c00);
+  border-bottom: 1px solid #fb8c00;
+}
+
+.light-theme #controls select {
+  background: linear-gradient(60deg, #ffa726, #fb8c00);
+  border: 1px solid #fb8c00;
+}
+
+.annotation {
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+}
+
+select option {
+  margin: 40px;
+  background: #f3b76e;
+  color: #fff;
+  text-shadow: 0 1px 0 #ffa726;
+  border: none;
+}
+
+.sentence {
+  border: 1px solid #fb8c00;
+}
+
+#btnBookmarks,
+#bookmarks-panel,
+#btnThemeToggle {
+  display: none;
+}
+
+.barBlock {
+  /*border: 2px dotted #fb8c00;*/
+  pointer-events: none;
+}
+
+.title {
+  top: 10px;
+  color: white;
+  position: relative;
+}
+
+
+
+/* edit color palette da qui */
+
+
+.table tr {
+  border: solid 1px #002e57 !important;
+}
+
+.light-theme .controls {
+  /*background: linear-gradient(60deg, #2181c4, #002e57) !important;*/
+  background: #FFF !important;
+  color: black !important;
+  border: 1px solid #FFF !important;
+}
+
+.light-theme #controls select {
+  /*background: linear-gradient(60deg, #2181c4, #002e57) !important;*/
+  background: #FFF !important;
+  color: black !important;
+  border: 1px solid #FFF !important;
+}
+
+select option {
+  background: white;
+  color: black !important;
+  text-shadow: 0 1px 0 #ffa726;
+}
+
+.text-warning {
+  color: #000 !important;
+}
+
+.barBlock {
+  border-left: 3px dotted #2181c4 !important;
+}
+
+.highlight {
+  color: transparent !important;
+  background-color: yellow !important;
+  opacity: 0.5 !important;
+}
+
+#controls {
+  height: 45px !important;
+}
+
+
+.title-decoration {
+  -moz-text-decoration-style: underline;
+  /* Code for Firefox */
+  text-decoration: underline;
+  text-decoration-color: red;
+  text-decoration-thickness: 5px;
+}
+
+.text-decoration {
+  -moz-text-decoration-style: underline;
+  /* Code for Firefox */
+  text-decoration: underline;
+  text-decoration-color: blue;
+  text-decoration-thickness: 2px;
+}
+
+.cell-decoration {
+  -moz-text-decoration-style: underline;
+  /* Code for Firefox */
+  text-decoration: underline;
+  text-decoration-color: green;
+  text-decoration-thickness: 2px;
+}
+
+
+.barBlockNeedle:nth-child(odd) {
+  border: 2px solid orange !important;
+  pointer-events: none;
+}
+
+.barBlockNeedle:nth-child(even) {
+  border: 3px dotted orange !important;
+  pointer-events: none;
+}
+
+#pgCount,
+.btn,
+#controls select {
+  color: #000 !important;
+}
+
+.light-theme #idrviewer {
+  background: #f1f1f1 none repeat scroll 0 0 !important;
+}
+
+
+.mark,
+mark {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.editMode {
+  background-color: black;
+  color: white;
+}
+
+.editMode i {
+  color: white !important;
+}
+
+.btn-secondary:hover {
+  color: #fff;
+  background-color: #5c636a;
+  border-color: #565e64;
+}
+
+.btn-secondary {
+  width: 100px;
+}
+
+.btn-primary:hover {
+  color: #fff;
+  background-color: #5c636a;
+  border-color: #565e64;
+}
+
+.btn-primary {
+  width: 100px;
+}
+
+.modal-header button {
+  border: none;
+}
+
+.double_view {
+    background-color: rgba(0, 204, 0, 0.5) !important;
+}
+
+.opacity {
+    opacity: 1;
+}
+
+.innerBarBlock {
+  border-left: 3px dotted #c43c21 !important;
+  pointer-events: none;
+}
+
+.controls {
+  z-index: 5;
+}

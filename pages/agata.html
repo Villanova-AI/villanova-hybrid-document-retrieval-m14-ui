@@ -1,0 +1,473 @@
+<div class="card agata" style="height: calc(100vh - 34px);">
+    <div class="card-header card-header-warning" style="padding: 15px 0px; ">
+        <h4 class="card-title" style="margin-bottom: 5;">Agata RAG Projects Manager
+        </h4>
+    </div>
+    <div class="card-body" style="padding-top: 0px; overflow: hidden; padding-bottom: 90px">
+
+        <div class="container-m-nx container-m-ny bg-lightest mb-3">
+            <ol id="breadcrumb" class="breadcrumb text-big container-p-x py-3 m-0">
+                <li class="breadcrumb-item">
+                    <a class="root" href="javascript:void(0)">Root</a>
+                </li>
+            </ol>
+
+            <i title="Add Root Folder" id="addRootFolderBTN" class="fa fa-folder-o fa-2x" aria-hidden="true"
+                style="top: 16px; cursor: pointer; padding: 0; right: 16px; position: absolute; z-index: 10; display: none;"></i>
+
+            <i title="Switch Visualization" id="switchVisualization" class="fa fa-table fa-2x" aria-hidden="true"
+                style="top: 16px; cursor: pointer; padding: 0; right: 50px; position: absolute; z-index: 10;"></i>
+
+        </div>
+
+
+        <div style="padding: 5px;">
+            <div id="rootFiles" class="file-manager-container file-manager-col-view" style="height: calc(100vh - 140px);">
+               
+            </div>
+
+            <div id="rootFilesTable" style="display: none;">
+
+            </div>
+        </div>
+
+        <div class="lds-facebook" id="loader" style="margin-top: 100px; display: none;">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+
+        <div id="tableContainer" class="table-responsive"
+            style="width: 100%; height: 100%; margin-top: 0; display: none;">
+            <i title="Refresh Table" id="refreshTable" class="fa fa-refresh fa-2x" aria-hidden="true"
+                style="top: 45px; cursor: pointer; padding: 20px; left: 6px; position: absolute; z-index: 10;"></i>
+            <i title="Add File" id="addDocument" class="fa fa-file-pdf-o fa-2x" aria-hidden="true"
+                style="top: 45px; cursor: pointer; padding: 20px; left: 50px; position: absolute; z-index: 10;"></i>
+            <i title="Batch Indexing" id="batchIndexing" class="fa fa-server fa-2x" aria-hidden="true"
+                style="top: 45px; cursor: pointer; padding: 20px; padding-top: 22px; left: 95px; position: absolute; z-index: 10;">
+            </i>
+            <i title="Create Virtual Collection" id="virtualCreate" class="fa fa-2x" aria-hidden="true"
+                style="top: 45px; cursor: pointer; padding: 20px; left: 145px; position: absolute; z-index: 10; background: url('./images/virtual_folder_new3.png') no-repeat center center; background-size: 32px; margin: 15px 15px;"
+            ></i>
+            <table id="stepsTable" class="table">
+                <thead class="text-warning">
+                    <tr style="text-align: center;">
+                        <th></th>
+                        <th style="text-align: left;">Description</th>
+                        <th>Conversion</th>
+                        <th>Indexing</th>
+                        <th>Progress</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="steps">
+
+                </tbody>
+            </table>
+        </div>
+
+
+        <div id="animatedModal" style="overflow-x: hidden;">
+            <div class="close-animatedModal"
+                style="width: 28px; float: right; cursor: pointer; display: none; padding-top: 5px;">
+                <span class="material-icons" style="color: #000;" title="Close document">
+                    cancel
+                </span>
+            </div>
+            <div style="border-top: 5px solid var(--primaryColor-100) ; display: none;" class="content-visual-modal">
+                <div class="split" style="height: calc(100vh - 10px); margin: 0;">
+                    <div id="split-0" class="bl" style="padding: 0;">
+                        <div class="top-bar sx-top-bar">
+                            <a href="agata.html" class="simple-text logo-normal">
+                                <img height="25"
+                                    style="float:left; margin-left: 5px; margin-top: 10px; margin-bottom: 10px;"
+                                    src="images/villanova.ai.png">
+                            </a>
+                        </div>
+
+                        <div id="accordion" style="max-height: calc(100vh - 60px); height: 100%; overflow-y: hidden;">
+                            <div class="alert alert-with-icon" data-notify="container"
+                                style="background-color: #E7E7E7 !important; padding: 10px;">
+                                <span class="nameFolder" style="display: inline-flex;"></span>
+
+                                <i class="material-icons"
+                                    style="display: inline-flex; position: relative; color: #000 !important; top: 10px; margin-right: 20px;"
+                                    data-notify="icon">file_open</i>
+
+                                <span data-notify="message" style="display: inline-flex;">
+                                    <select id="documentsQA" class="form-control" style="">
+                                    </select>
+                                </span>
+                            </div>
+
+                            <div class="card card-chart qATab" style="display: none;">
+                                <div class="card-body" id="qaDiv">
+                                    <div class="input-group no-border">
+                                        <div class="row" style="width: 100%; justify-content: space-between;">
+                                            <div id="questionContainer" class="form-group"
+                                                style="width: calc(100% - 200px); margin-left: 10px;">
+                                                <div style="width: 100%;">
+
+                                                    <form id="sendQa" style="width: 80%; display: inline-flex;">
+                                                        <input style="margin: 0 auto; margin-left: 10px;" id="question" type="text"
+                                                            class="form-control" name="question"
+                                                            placeholder="Insert your question here" />
+                                                    </form>
+
+                                                    <div class="countrySelect" style="display: inline-flex;">
+                                                        <select id="countrySelect" title="" style="background-color: #fff; display: none;" multiple></select>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div style="width: fit-content;" class="btnContainer">
+
+                                                <button style="top: 0px; display: inline-block;" type="submit"
+                                                    id="searchQa" class="btn btn-white btn-round btn-just-icon">
+                                                    <i class="material-icons">search</i>
+                                                </button>
+                                                <button style="top: 0px; display: inline-block;" type="submit"
+                                                    id="settingQa" class="btn btn-white btn-round btn-just-icon">
+                                                    <i class="material-icons">settings</i>
+                                                </button>
+                                                <button style="top: 0px; display: inline-block;" type="submit"
+                                                    id="settingGeneral" class="btn btn-white btn-round btn-just-icon">
+                                                    <i class="material-icons">settings_suggest</i>
+                                                </button>
+                                                <button style="top: 0px; display: inline-block;" type="submit"
+                                                    id="filterQa" class="btn btn-white btn-round btn-just-icon">
+                                                    <i class="material-icons">filter_list</i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div id="searchImageContainer" style="display: none; padding-left: 5px; padding-right: 25px; padding-bottom: 20px;"></div>
+                                    </div>
+
+                                    <div id="answersList"
+                                        style="height: calc(70vh - 200px); overflow-y: auto; margin-bottom: 10px;">
+                                    </div>
+
+
+                                </div>
+                                <!--  </div>-->
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div id="split-1" class="ifPdf gutter-col gutter-col-1" style="padding: 0; overflow: hidden;">
+                        <span class="loaderPdf" style="display: none;"></span>
+                        <iframe id="documentPdf" frameborder="0" width="100%" height="100%"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="newRootModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content" style="width: 300px; margin: 0 auto; top: 144px">
+                    <div class="modal-header">
+                        <h5 class="modal-title">New root folder</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" style="text-align: center;">
+                        <div class="form-group">
+                            <label class="bmd-label-floating">Folder name</label>
+                            <input type="text" class="addNewroot form-control" />
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-warning saveRoot">Create</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="renameModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content" style="width: 300px; margin: 0 auto; top: 144px">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Rename folder</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" style="text-align: center;">
+                        <div class="form-group">
+                            <label class="bmd-label-floating">New name</label>
+                            <input type="text" class="filename form-control" />
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-warning saveRename">Rename</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="deletRootModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content" style="width: 300px; margin: 0 auto; top: 144px">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Remove folder</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" style="text-align: center;">
+                        <div class="form-group">
+                            <label class="bmd-label-floating">Remove folder?</label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-warning deleteRootFolder">Delete</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade show" id="advancedSettingGeneral" tabindex="-1" role="dialog" aria-hidden="true"
+            style="z-index:100000; overflow: hidden;">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" style="font-weight: 400;">Extras</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" style="overflow-y: auto; height: calc(100vh - 200px);">
+
+                        <div class="card card-chart qATab" style="display: none;">
+                            <div class="card-header card-header-success" id="headingQaVote">
+                                <h5 class="mb-0">
+                                    <div class="ct-chart collapsed" data-toggle="collapse" data-target="#collapseQaVote"
+                                        aria-expanded="false" aria-controls="collapse" style="cursor: pointer;"
+                                        id="qaVoteClick">
+                                        Q&A Votes<i class="fa fa-chevron-up"></i>
+                                    </div>
+                                </h5>
+                            </div>
+                            <div id="collapseQaVote" class="collapse" aria-labelledby="headingQaVote">
+                                <div class="card-body">
+                                    <div id="qaVoteList" style1="height: calc(50vh - 100px); overflow-y: auto;"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card card-chart qATab" style="display: none;">
+                            <div class="card-header card-header-success" id="headingAuto">
+                                <h5 class="mb-0">
+                                    <div class="ct-chart collapsed" data-toggle="collapse" data-target="#collapseAuto"
+                                        aria-expanded="false" aria-controls="collapse" style="cursor: pointer;" id="">
+                                        Autocomplete<i class="fa fa-chevron-up"></i>
+                                    </div>
+                                </h5>
+                            </div>
+                            <div id="collapseAuto" class="collapse" aria-labelledby="headingAuto">
+                                <div class="card-body">
+                                    <div id="qautoList" style1="height: calc(50vh - 100px); overflow-y: auto;"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card card-chart qATab" style="display: none;">
+                            <div class="card-header card-header-success" id="headingQaBatchTest">
+                                <h5 class="mb-0">
+                                    <div class="ct-chart collapsed" data-toggle="collapse" data-target="#collapseQaBatchTest"
+                                        aria-expanded="false" aria-controls="collapse" style="cursor: pointer;"
+                                        id="QaBatchTestClick">
+                                        Q&A Batch Test<i class="fa fa-chevron-up"></i>
+                                    </div>
+                                </h5>
+                            </div>
+                            <div id="collapseQaBatchTest" class="collapse" aria-labelledby="headingQaBatchTest">
+                                <div class="card-body">
+                                    <div id="QaBatchTest" style1="height: calc(50vh - 100px); overflow-y: auto;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card card-chart qATab" style="display: none;">
+                            <div class="card-header card-header-success" id="headingDeleteConfig">
+                                <h5 class="mb-0">
+                                    <div class="ct-chart collapsed" data-toggle="collapse" data-target="#collapseDeleteConfig"
+                                        aria-expanded="false" aria-controls="collapse" style="cursor: pointer;"
+                                        id="DeleteConfigClick">
+                                        Config Management<i class="fa fa-chevron-up"></i>
+                                    </div>
+                                </h5>
+                            </div>
+                            <div id="collapseDeleteConfig" class="collapse" aria-labelledby="headingDeleteConfig">
+                                <div class="card-body">
+                                    <div id="configManagement" style="min-height:250px; overflow-y: auto; display: flex; justify-content: space-evenly; align-items: center; margin: 10px 0;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="saveTerms" type="button" style="display: none;"
+                            class="btn btn-warning">Save</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content" style="width: 300px; margin: 0 auto; top: 144px">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Share folder</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="lds-facebook loaderShare" style="margin-top: 100px;">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                    <div class="modal-body loadShare" style="display: none; display: flex; align-items: center; flex-direction: column; width: 100%;">
+
+                        <div>
+                            Regex Allowed Users
+                        </div>
+
+                        <div class="form-group">
+                            <input type="text" id="regex"/>
+                        </div>
+                        <button type="button" class="btn btn-secondary" id="regexBtn">Save regex</button>
+
+                        <div>
+                            Currently Allowed Users
+                        </div>
+
+                        <div class="form-group">
+                            <select id="shared" multiple="multiple">
+                                
+                            </select>
+                        </div>
+
+                        <div>
+                            Users List
+                        </div>
+
+                        <div class="form-group">
+                            <select id="users">
+                                
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="addVirtualCollection" tabindex="-1" role="dialog" aria-hidden="true" style="z-index:100000; overflow: hidden;">
+            <div class="modal-dialog" style="width:60%;" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" style="font-weight: 400;">Create Virtual Collection</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" style="overflow-y: auto; max-height: 500px; transform: scale(0.875);">
+                        <div style="border: solid 1px black; width: 95%; padding: 10px; margin-left: auto; margin-right: auto;">
+                            <table id="virtualCollectionTable" style="width: 100%;"></table>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="saveVirtualCollection" type="button" class="btn btn-warning">Save</button>
+                        <button id="closeVirtualCollection" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="batchIndexingFromTable" tabindex="-1" role="dialog" aria-hidden="true" style="z-index:100000; overflow: hidden;">
+            <div class="modal-dialog" style="width:80%;" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" style="font-weight: 400;">Index from Table</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body batchIndexingContainer" style="overflow-y: auto; max-height: 800px;">                        
+                        <div style="height: 100%; background-color: #f5f5f5; padding: 20px;">
+                            <div class="dragDropContainer" style="display: block;">
+                                <div class="row" style="margin-left: 0; margin-right: 0;">
+                                    <div class="col-md-12">
+                                        <div class="row" style="margin-left: 0; margin-right: 0;">
+                                            <h6>Columns</h6>
+                                        </div>
+                                        <div class="row" style="margin-left: 0; margin-right: 0;">
+                                            <div id="draggableContainer" class="row droppable" style="margin-left: 0; margin-right: 0;">
+                                        </div>            
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            <div class="row" style="margin-left: 0; margin-right: 0;">
+                                <div class="col-md-4" style="padding-right: 15px;">
+                                    <div class="row" style="margin-left: 0; margin-right: 0;">
+                                        <h6>Content</h6>
+                                    </div>
+                                    <div class="row" style="margin-left: 0; margin-right: 0;">
+                                        <div id="indexingContent" class="row droppable" style="margin-left: 0; margin-right: 0;"></div>            
+                                    </div>
+                                </div>
+                                <div class="col-md-4" style="padding-left: 15px;">
+                                    <div class="row" style="margin-left: 0; margin-right: 0;">
+                                        <h6>Fulltext Metadata (max. 3)</h6>
+                                    </div>
+                                    <div class="row" style="margin-left: 0; margin-right: 0;">
+                                        <div id="fulltextMetadata" class="row droppable" style="margin-left: 0; margin-right: 0;"></div>            
+                                    </div>
+                                </div>
+                                <div class="col-md-4" style="padding-left: 15px;">
+                                    <div class="row" style="margin-left: 0; margin-right: 0;">
+                                        <h6>Other Metadata</h6>
+                                    </div>
+                                    <div class="row" style="margin-left: 0; margin-right: 0;">
+                                        <div id="otherMetadata" class="row droppable" style="margin-left: 0; margin-right: 0;"></div>            
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="saveBatchIndexingFromTable" type="button" class="btn btn-warning">Start Indexing</button>
+                        <button id="closeBatchIndexingFromTable" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="excelDownload"
+            style="display: none; text-align: center; top: 50%; z-index: 999; left: 30%; background-color: #FFF; margin: auto; width: 30%; border: 3px solid var(--primaryColor-100) ; padding: 10px; position: absolute;">
+            <h3>Generate Excel...</h3>
+            <div class="lds-facebook">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </div>
+</div>

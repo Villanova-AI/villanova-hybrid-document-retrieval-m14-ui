@@ -1,0 +1,4 @@
+RewriteEngine On
+RewriteRule ^(.*)$ http://localhost:8080/$1 [P,L]
+RewriteRule .* - [E=noabort:1]
+RewriteRule .* - [E=noconntimeout:1]
